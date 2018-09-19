@@ -30,7 +30,7 @@ window.addEventListener("load",function(){
             //
             // }else{
             //
-            //     stage.scaleMode=annie.StageScaleMode.FIXED_HEIGHT
+            //     stage.scaleMode=annie.StageScaleMode.FIXED_WIDTH
             //     stage.resize()
             //
             //
@@ -62,8 +62,8 @@ window.addEventListener("load",function(){
 
 
                         mc=new index.MC()
-
                         stage.addChild(mc)
+                        mc.y=stage.viewRect.y
 
                         mc.start_btn.addEventListener(annie.MouseEvent.MOUSE_DOWN,ok_C)
 
