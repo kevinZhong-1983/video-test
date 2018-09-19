@@ -69,9 +69,6 @@ window.addEventListener("load",function(){
 
                         function ok_C(e){
 
-
-                            console.log("开始")
-
                             video_mc.style.display='block'
                             video_play.play()
 
