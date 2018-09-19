@@ -39,6 +39,8 @@ window.addEventListener("load",function(){
 
             video_mc=document.getElementById('video_mc')
             video_play=document.getElementById('video')
+            video_play.play()
+            video_play.pause()
 
             var load = new loading.Loading();
 
@@ -64,6 +66,7 @@ window.addEventListener("load",function(){
                         mc=new index.MC()
                         stage.addChild(mc)
                         mc.y=stage.viewRect.y
+                        stage.scaleMode=annie.StageScaleMode.FIXED_WIDTH
                         stage.resize()
 
                         mc.start_btn.addEventListener(annie.MouseEvent.MOUSE_DOWN,ok_C)
