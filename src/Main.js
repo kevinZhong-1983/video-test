@@ -47,6 +47,7 @@ window.addEventListener("load",function(){
             if(result.sceneId==result.sceneTotal) {
 
                 stage.addChild(load);
+                load.y=stage.viewRect.y
 
 
 
