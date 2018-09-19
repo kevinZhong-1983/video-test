@@ -30,7 +30,7 @@ window.addEventListener("load",function(){
             //
             // }else{
             //
-            //     stage.scaleMode=annie.StageScaleMode.FIXED_HEIGHT
+            //     stage.scaleMode=annie.StageScaleMode.FIXED_WIDTH
             //     stage.resize()
             //
             //
@@ -39,13 +39,16 @@ window.addEventListener("load",function(){
 
             video_mc=document.getElementById('video_mc')
             video_play=document.getElementById('video')
+            video_play.play()
+            video_play.pause()
 
             var load = new loading.Loading();
 
             if(result.sceneId==result.sceneTotal) {
 
                 stage.addChild(load);
-
+                load.y=stage.viewRect.y
+                stage.resize()
 
 
                 Flash2x.loadScene(["index"],function(per){
@@ -62,12 +65,16 @@ window.addEventListener("load",function(){
 
 
                         mc=new index.MC()
-
                         stage.addChild(mc)
+                        mc.y=stage.viewRect.y
+                        stage.resize()
 
                         mc.start_btn.addEventListener(annie.MouseEvent.MOUSE_DOWN,ok_C)
 
                         function ok_C(e){
+
+
+                            console.log("开始")
 
                             video_mc.style.display='block'
                             video_play.play()
