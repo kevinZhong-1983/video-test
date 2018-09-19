@@ -67,7 +67,6 @@ window.addEventListener("load",function(){
                         mc=new index.MC()
                         stage.addChild(mc)
                         mc.y=stage.viewRect.y
-                        //stage.scaleMode=annie.StageScaleMode.FIXED_WIDTH
                         stage.resize()
 
                         mc.start_btn.addEventListener(annie.MouseEvent.MOUSE_DOWN,ok_C)
