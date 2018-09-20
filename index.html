@@ -1,19 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>test</title>
+    <title>2019款传祺GS4 PHEV焕新上市</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,minimum-scale=1.0,user-scalable=no">
-    <!--如果需要往qq里分享则需要开启下面三个属性-->
-    <!--<meta itemprop="name" content="Flash2x开发神器!">-->
-    <!--<meta itemprop="description" content="用Flash2x开发Html5项目,让制作更简单,让动画更高效!">-->
-    <!--<meta itemprop="image" content="http://web.flash2x.org/Public/images/Flash2xLogo.png">-->
     <script src="libs/annieCore.min.js"></script>
     <!--如果有用到annieUI组件类,则需要开启下面的js-->
     <!--<script src="libs/annieUI.min.js"></script>-->
     <script type="text/javascript" src="libs/jquery-1.10.1.min.js"></script>
     <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
-    <script src="src/Main.js?v=2"></script>
+    <script src="src/Main.js?v=4"></script>
     <style>
         html,body{
             width: 100%;
@@ -22,7 +18,7 @@
             border: 0px;
             overflow: hidden;
             position: absolute;
-            background-color: #FFFFFF;
+            background-color:black;
         }
 
         .video_mc{
@@ -32,20 +28,88 @@
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: 99;
+            z-index: 9;
             display: none;
 
         }
+
+        .music_btn{position:absolute;background: url("resource/on.png") no-repeat;background-size:100%;width:7%;height: 7%;top:2%;right:3%;z-index: 99;}
     </style>
 </head>
 <body>
+
+<div class="music_btn" id="audioBtn"></div>
 <!--如果不想canvas全屏而是作为html中的一个标签,请设置div的style.width和style.height为实际值如<div id="annieEngine" style="width:320px;height:576px;line-height:0;font-size:0"></div>-->
 <div id="annieEngine" style="line-height:0;font-size:0"></div>
+<audio src="resource/music.mp3" id="musicPlay" autoplay loop></audio>
 <div class="video_mc" id="video_mc">
 
-    <video src="resource/video.mp4" preload="auto" webkit-playsinline playsinline autoplay id="video" width="100%" height="100%" style="object-fit:contain"></video>
+    <video src="resource/video.mp4" preload="true" poster="resource/poster.jpg" playsinline="true" webkit-playsinline x5-video-player-fullscreen="true" x5-video-player-type="h5" x-webkit-airplay="true" id="video_box" width=1></video>
 
 </div>
+
+<script>
+
+    //背景音乐
+
+    function play_music(){
+
+        document.getElementById("musicPlay").play();
+        $("#audioBtn").css("background-image","url(resource/on.png)")
+
+    }
+
+
+    function stop_music(){
+
+        document.getElementById("musicPlay").pause();
+        $("#audioBtn").css("background-image","url(resource/off.png)")
+
+    }
+
+    //解决苹果在微信端不能自动音乐的问题
+    setTimeout(function(){
+        $(window).scrollTop(1);
+    },0);
+
+    var audio = $('#musicPlay');
+    var isPlaying = false;
+
+    document.getElementById("audioBtn").addEventListener("touchstart",function(e){
+
+
+        if(isPlaying){
+
+            stop_music()
+            isPlaying=false
+        }else{
+
+            play_music()
+            isPlaying=true
+        }
+
+
+    })
+    function playAudio() {
+        var audio = $('#musicPlay');
+        if (audio.attr('src') == undefined) {
+
+            audio.attr('src', audio.data('src'));
+        }
+        audio[0].play();
+        isPlaying = true;
+    }
+    $(function(){
+        playAudio();
+        document.addEventListener("WeixinJSBridgeReady", function () {
+            WeixinJSBridge.invoke('getNetworkType', {}, function (e) {
+                network = e.err_msg.split(":")[1];  //结果在这里
+                playAudio();
+            });
+        }, false);
+    })
+
+</script>
 
 </body>
 </html>
